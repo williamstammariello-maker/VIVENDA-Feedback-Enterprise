@@ -1,0 +1,7 @@
+{
+  "deviceId": "KIOSK-01",
+  "version": "2.0.0",
+  "api": "https://script.google.com/macros/s/AKfycbwL5z0BmWHzHnMYOTRqHcDYoj-pikBzXHgIbACMxlofXTXudJxhkAqC0lD62DBmJRva8Q/exec",
+  "returnSeconds": 4,
+  "lockSeconds": 5
+}

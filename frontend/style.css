@@ -1,0 +1,178 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif;
+    background:#f5f7fb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:hidden;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+    min-height:100vh;
+    background:#fff;
+    padding:30px 20px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    border-radius:0;
+    box-shadow:none;
+}
+
+.logo{
+
+    width:220px;
+
+    margin-bottom:35px;
+
+}
+
+h1{
+
+    font-size:2.4rem;
+
+    color:#222;
+
+}
+
+.subtitle{
+
+    margin-top:15px;
+
+    color:#666;
+
+    font-size:1.1rem;
+
+}
+
+#emojiContainer{
+    display:grid;
+    grid-template-columns:repeat(5,minmax(55px,1fr));
+    gap:12px;
+    align-items:start;
+    justify-items:center;
+    margin-top:40px;
+}
+
+.vote-card{
+    cursor:pointer;
+    transition:.18s;
+}
+
+.vote-card:active{
+    transform:scale(.92);
+}
+
+.vote-card img{
+    width:65px;
+    height:65px;
+
+.vote-card p{
+
+    margin-top:15px;
+
+    font-size:1.2rem;
+
+    color:#222;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+.check{
+
+    font-size:120px;
+
+    color:#28a745;
+
+    margin-bottom:20px;
+
+}
+
+#thanksPage h2{
+
+    font-size:3rem;
+
+}
+
+#thanksPage p{
+
+    margin-top:20px;
+
+    font-size:1.4rem;
+
+    color:#666;
+
+}
+.circle{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+    transition:.18s;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.circle:hover{
+
+    transform:scale(1.08);
+
+}
+
+.vote-card p{
+    margin-top:10px;
+    font-size:.85rem;
+    color:#333;
+}
+
+button{
+    border:none;
+    background:none;
+}
+
+.hidden{
+    display:none !important;   
+}
+
+.vote-card.sending{
+    pointer-events:none;
+    animation:pulse .6s infinite;
+}
+
+@keyframes pulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(.92);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
+}
+
+.circle img{
+    width:65px;
+    height:65px;
+    display:block;
+}
