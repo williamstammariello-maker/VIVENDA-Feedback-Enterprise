@@ -101,7 +101,7 @@ livelli.forEach((livello) => {
   card.className = "vote-card";
 
   card.innerHTML = `
-<div class="circle" style="background:${livello.colore}">
+<div class="circle">
     <img src="${livello.svg}" alt="${livello.nome}">
 </div>
 

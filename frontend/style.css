@@ -75,15 +75,13 @@ h1{
 .vote-card img{
     width:65px;
     height:65px;
+    display:block;
+}
 
 .vote-card p{
-
-    margin-top:15px;
-
-    font-size:1.2rem;
-
-    color:#222;
-
+    margin-top:10px;
+    font-size:.85rem;
+    color:#333;
 }
 
 .hidden{
@@ -169,10 +167,4 @@ button{
         transform:scale(1);
     }
 
-}
-
-.circle img{
-    width:65px;
-    height:65px;
-    display:block;
 }
