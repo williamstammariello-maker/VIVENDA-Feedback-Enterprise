@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VIVENDA Feedback Enterprise - Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo-area">
+
+        <img src="../assets/logo/logo-vivenda.png" alt="Vivenda">
+
+        <div>
+
+            <h1>VIVENDA Feedback Enterprise</h1>
+
+            <p>Dashboard Amministratore</p>
+
+        </div>
+
+    </div>
+
+    <div class="datetime" id="dateTime"></div>
+
+    <div id="backendStatus" class="status offline">
+        🔴 Offline
+    </div>
+
+</header>
+
+<main class="container">
+
+    <!-- KPI PRINCIPALI -->
+
+    <section class="cards">
+
+        <div class="card">
+            <span class="emoji">😍</span>
+            <h2 id="ottimo">0</h2>
+            <p>Ottimo</p>
+        </div>
+
+        <div class="card">
+            <span class="emoji">😊</span>
+            <h2 id="buono">0</h2>
+            <p>Buono</p>
+        </div>
+
+        <div class="card">
+            <span class="emoji">😐</span>
+            <h2 id="sufficiente">0</h2>
+            <p>Sufficiente</p>
+        </div>
+
+        <div class="card">
+            <span class="emoji">🙁</span>
+            <h2 id="mediocre">0</h2>
+            <p>Mediocre</p>
+        </div>
+
+        <div class="card">
+            <span class="emoji">😡</span>
+            <h2 id="insufficiente">0</h2>
+            <p>Insufficiente</p>
+        </div>
+
+    </section>
+
+    <!-- KPI ENTERPRISE -->
+
+    <section class="cards">
+
+        <div class="card">
+            <span class="emoji">📊</span>
+            <h2 id="totaleFeedback">0</h2>
+            <p>Feedback Totali</p>
+        </div>
+
+        <div class="card">
+            <span class="emoji">⭐</span>
+            <h2 id="media">0.00</h2>
+            <p>Media</p>
+        </div>
+
+        <div class="card">
+            <span class="emoji">🏆</span>
+            <h2 id="percentualeOttimo">0%</h2>
+            <p>Ottimo</p>
+        </div>
+
+        <div class="card">
+            <span class="emoji">📱</span>
+            <h2 id="dispositiviAttivi">0</h2>
+            <p>Dispositivi Attivi</p>
+        </div>
+
+        <div class="card">
+            <span class="emoji">🕒</span>
+            <h2 id="ultimoVoto">--:--</h2>
+            <p>Ultimo voto</p>
+        </div>
+
+    </section>
+
+    <!-- FILTRI -->
+
+    <section class="filters">
+
+        <select id="filterServizio">
+
+            <option value="">Tutti i servizi</option>
+
+            <option value="Colazione">Colazione</option>
+
+            <option value="Pranzo">Pranzo</option>
+
+            <option value="Cena">Cena</option>
+
+        </select>
+
+        <button id="btnRefresh">
+
+            🔄 Aggiorna
+
+        </button>
+
+    </section>
+
+    <!-- GRAFICI -->
+
+    <section class="chart-grid">
+
+        <div class="chart-card">
+
+            <h2>Distribuzione Feedback</h2>
+
+            <canvas id="feedbackChart"></canvas>
+
+        </div>
+
+        <div class="chart-card">
+
+            <h2>Ripartizione Percentuale</h2>
+
+            <canvas id="feedbackPie"></canvas>
+
+        </div>
+
+    </section>
+
+    <!-- TABELLA -->
+
+    <section class="table-card">
+
+        <h2>Ultimi Feedback</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Data</th>
+                    <th>Ora</th>
+                    <th>Servizio</th>
+                    <th>Giudizio</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="lastVotes">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</main>
+
+<script src="dashboard.js"></script>
+
+</body>
+
+</html>
