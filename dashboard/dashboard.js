@@ -3,11 +3,17 @@ const API_URL =
 
 let barChart = null;
 let pieChart = null;
+let trendChart = null;
 let dashboardData = null;
+let loading = false;
 
 document.addEventListener("DOMContentLoaded", () => {
 
     loadDashboard();
+
+    if (loading) return;
+
+loading = true;
 
     document
         .getElementById("btnRefresh")
@@ -17,8 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
         .getElementById("filterServizio")
         ?.addEventListener("change", filterDashboard);
 
-    setInterval(loadDashboard,30000);
+    setInterval(() => {
 
+    if (!document.hidden) {
+
+        loadDashboard();
+
+    }
+
+},30000);
+loading = false;
 });
 
 async function loadDashboard(){
@@ -49,6 +63,9 @@ async function loadDashboard(){
 
         dashboardData=result.data;
 
+        document.title =
+`VIVENDA Dashboard • ${dashboardData.totale} feedback`;
+
         updateBackendStatus(true);
 
         updateCards(dashboardData);
@@ -66,6 +83,8 @@ async function loadDashboard(){
         console.error(err);
 
         updateBackendStatus(false);
+
+        loading = false;
 
     }
 
@@ -120,6 +139,8 @@ function updateCharts(data){
     drawBarChart(data.livelli);
 
     drawPieChart(data.livelli);
+
+    drawTrendChart(data.trend30);
 
 }
 
@@ -362,5 +383,71 @@ document.addEventListener("visibilitychange", () => {
     }
 
 });
+
+function drawTrendChart(trend) {
+
+    const canvas = document.getElementById("trendChart");
+
+    if (!canvas || !trend) return;
+
+    if (trendChart) {
+        trendChart.destroy();
+    }
+
+    trendChart = new Chart(canvas, {
+
+        type: "line",
+
+        data: {
+
+            labels: trend.map(t => t.data),
+
+            datasets: [{
+
+                label: "Media giornaliera",
+
+                data: trend.map(t => t.media),
+
+                tension: 0.35,
+
+                fill: false
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+
+                    display: true
+
+                }
+
+            },
+
+            scales: {
+
+                y: {
+
+                    min: 0,
+
+                    max: 9
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
 
 console.log("VIVENDA Dashboard Enterprise v1.0 caricata");
