@@ -219,9 +219,13 @@ async function inviaVoto(livello, card) {
 
     } catch (e) {
 
-    console.error(e);
+    console.error("ERRORE COMPLETO:", e);
 
-    alert("ERRORE:\n\n" + e.message);
+    if (e && e.stack) {
+        alert(e.stack);
+    } else {
+        alert(JSON.stringify(e));
+    }
 
 }
 
