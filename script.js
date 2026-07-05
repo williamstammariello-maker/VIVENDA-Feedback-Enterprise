@@ -203,12 +203,18 @@ async function inviaVoto(livello, card) {
 
         const json = await response.json();
 
-        if (!json.success) {
+if (!json.success) {
 
-            throw new Error(json.error);
+    if (json.code === "SERVIZIO_CHIUSO") {
 
-        }
+        mostraServizioChiuso();
+        return;
 
+    }
+
+    throw new Error(json.error);
+
+}
         localStorage.setItem("ultimoVoto", Date.now().toString());
 
         console.log("Voto registrato");
@@ -219,7 +225,20 @@ async function inviaVoto(livello, card) {
 
     } catch (e) {
 
-    console.error("ERRORE COMPLETO:", e);
+    console.error(e);
+
+    if (e.message === "Il servizio di votazione non è disponibile in questo orario.") {
+
+        mostraServizioChiuso();
+        return;
+
+    }
+
+    alert(
+        "Errore di comunicazione con il server.\n\nRiprovare tra qualche istante."
+    );
+
+}
 
     if (e && e.stack) {
         alert(e.stack);
@@ -343,6 +362,19 @@ window.addEventListener("load", async () => {
 
 });
 
+/* ==========================================================
+   SERVIZIO CHIUSO
+========================================================== */
+
+function mostraServizioChiuso() {
+
+    votePage.classList.add("hidden");
+
+    thanksPage.classList.add("hidden");
+
+    closedPage.classList.remove("hidden");
+
+}
 
 /* ==========================================================
    SERVICE WORKER
