@@ -168,3 +168,42 @@ button{
     }
 
 }
+
+#closedPage{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+
+}
+
+.closed-container{
+
+    max-width:700px;
+    text-align:center;
+    padding:50px;
+
+}
+
+.closed-container h1{
+
+    font-size:90px;
+    margin-bottom:20px;
+
+}
+
+.closed-container h2{
+
+    font-size:42px;
+    color:#009688;
+    margin-bottom:25px;
+
+}
+
+.closed-container p{
+
+    font-size:24px;
+    line-height:1.6;
+
+}

@@ -40,6 +40,7 @@ const livelli = [
 const emojiContainer = document.getElementById("emojiContainer");
 const votePage = document.getElementById("votePage");
 const thanksPage = document.getElementById("thanksPage");
+const closedPage = document.getElementById("closedPage");
 
 emojiContainer.style.pointerEvents = "none";
 emojiContainer.style.opacity = ".4";
@@ -246,13 +247,28 @@ async function inviaVoto(livello, card) {
 
 function mostraGrazie() {
 
-    votePage.classList.add("hidden");
-    thanksPage.classList.remove("hidden");
+    console.log("MOSTRA GRAZIE");
+
+    const vote = document.getElementById("votePage");
+    const thanks = document.getElementById("thanksPage");
+
+    if (!vote) {
+        console.error("votePage NON trovato");
+        return;
+    }
+
+    if (!thanks) {
+        console.error("thanksPage NON trovato");
+        return;
+    }
+
+    vote.classList.add("hidden");
+    thanks.classList.remove("hidden");
 
     setTimeout(() => {
 
-        thanksPage.classList.add("hidden");
-        votePage.classList.remove("hidden");
+        thanks.classList.add("hidden");
+        vote.classList.remove("hidden");
 
     }, APP_CONFIG.returnSeconds * 1000);
 
