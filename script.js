@@ -219,11 +219,11 @@ async function inviaVoto(livello, card) {
 
     } catch (e) {
 
-        console.error(e);
+    console.error(e);
 
-        alert("Errore durante l'invio del voto.");
+    alert("ERRORE:\n\n" + e.message);
 
-    }
+}
 
     setTimeout(() => {
 
