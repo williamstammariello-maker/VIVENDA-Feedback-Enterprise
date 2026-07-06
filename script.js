@@ -334,10 +334,41 @@ window.addEventListener("load", async () => {
 function mostraServizioChiuso() {
 
     votePage.classList.add("hidden");
-
     thanksPage.classList.add("hidden");
-
     closedPage.classList.remove("hidden");
+
+    // Controlla ogni minuto se il servizio è tornato disponibile
+    if (window.controlloServizio) {
+        clearInterval(window.controlloServizio);
+    }
+
+    window.controlloServizio = setInterval(async () => {
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}?action=status&device=${APP_CONFIG.dispositivo}`
+            );
+
+            const json = await response.json();
+
+            if (json.success && json.aperto) {
+
+                clearInterval(window.controlloServizio);
+
+                closedPage.classList.add("hidden");
+                thanksPage.classList.add("hidden");
+                votePage.classList.remove("hidden");
+
+            }
+
+        } catch (err) {
+
+            console.error(err);
+
+        }
+
+    }, 60000);
 
 }
 
