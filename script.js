@@ -235,28 +235,14 @@ async function inviaVoto(livello, card) {
 
 function mostraGrazie() {
 
-    console.log("MOSTRA GRAZIE");
-
-    const vote = document.getElementById("votePage");
-    const thanks = document.getElementById("thanksPage");
-
-    if (!vote) {
-        console.error("votePage NON trovato");
-        return;
-    }
-
-    if (!thanks) {
-        console.error("thanksPage NON trovato");
-        return;
-    }
-
-    vote.classList.add("hidden");
-    thanks.classList.remove("hidden");
+    closedPage.classList.add("hidden");
+    votePage.classList.add("hidden");
+    thanksPage.classList.remove("hidden");
 
     setTimeout(() => {
 
-        thanks.classList.add("hidden");
-        vote.classList.remove("hidden");
+        thanksPage.classList.add("hidden");
+        votePage.classList.remove("hidden");
 
     }, APP_CONFIG.returnSeconds * 1000);
 
