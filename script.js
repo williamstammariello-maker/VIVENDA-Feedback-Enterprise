@@ -132,11 +132,8 @@ livelli.forEach(livello => {
 async function inviaVoto(livello, card) {
 
     if (!configurazioneCaricata) {
-
         alert("Sistema in inizializzazione...");
-
         return;
-
     }
 
     const ultimoVoto = Number(localStorage.getItem("ultimoVoto") || 0);
@@ -151,37 +148,28 @@ async function inviaVoto(livello, card) {
     invioInCorso = true;
 
     document.querySelectorAll(".vote-card").forEach(c => {
-
         c.style.pointerEvents = "none";
-
     });
 
     card.style.transform = "scale(.90)";
     card.style.opacity = ".7";
 
-    const payload = {
-
-        caserma: APP_CONFIG.caserma,
-
-        dispositivo: APP_CONFIG.dispositivo,
-
-        puntoDistribuzione: APP_CONFIG.puntoDistribuzione,
-
-        servizio: APP_CONFIG.servizio || "",
-
-        livello: livello.nome,
-
-        peso: livello.voto,
-
-        uuid: window.crypto?.randomUUID
-    ? window.crypto.randomUUID()
-    : Date.now().toString() + Math.random().toString(36).substring(2),
-
-        userAgent: navigator.userAgent
-
-    };
-
     try {
+
+        const payload = {
+
+            caserma: APP_CONFIG.caserma,
+            dispositivo: APP_CONFIG.dispositivo,
+            puntoDistribuzione: APP_CONFIG.puntoDistribuzione,
+
+            livello: livello.nome,
+            peso: livello.voto,
+
+            uuid: crypto.randomUUID(),
+
+            userAgent: navigator.userAgent
+
+        };
 
         const response = await fetch(API_URL, {
 
@@ -195,60 +183,37 @@ async function inviaVoto(livello, card) {
 
         });
 
-        if (!response.ok) {
+        const json = await response.json();
 
-            throw new Error("Errore HTTP");
+        if (!json.success) {
+
+            if (json.code === "SERVIZIO_CHIUSO") {
+
+                mostraServizioChiuso();
+                return;
+
+            }
+
+            throw new Error(json.error);
 
         }
 
-        const json = await response.json();
-
-if (!json.success) {
-
-    if (json.code === "SERVIZIO_CHIUSO") {
-
-        mostraServizioChiuso();
-        return;
-
-    }
-
-    throw new Error(json.error);
-
-}
-        localStorage.setItem("ultimoVoto", Date.now().toString());
-
-        console.log("Voto registrato");
+        localStorage.setItem(
+            "ultimoVoto",
+            Date.now().toString()
+        );
 
         await heartbeat();
 
         mostraGrazie();
 
-    } catch (e) {
+    } catch (err) {
 
-    console.error(e);
+        console.error(err);
 
-    if (e.message === "Il servizio di votazione non è disponibile in questo orario.") {
+        alert(err.message);
 
-        mostraServizioChiuso();
-        return;
-
-    }
-
-    alert(
-        "Errore di comunicazione con il server.\n\nRiprovare tra qualche istante."
-    );
-
-}
-
-    if (e && e.stack) {
-        alert(e.stack);
-    } else {
-        alert(JSON.stringify(e));
-    }
-
-}
-
-    setTimeout(() => {
+    } finally {
 
         invioInCorso = false;
 
@@ -260,7 +225,7 @@ if (!json.success) {
 
         });
 
-    }, APP_CONFIG.lockSeconds * 1000);
+    }
 
 }
 
