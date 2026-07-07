@@ -11,9 +11,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loadDashboard();
 
+    
+loading = trueasync function loadDashboard(){
+
     if (loading) return;
 
-loading = true;
+    loading = true;
+
+    try{
+
+        updateBackendStatus(false);
+
+        const response = await fetch(
+            `${API_URL}?action=dashboard&t=${Date.now()}`,
+            {
+                cache:"no-store"
+            }
+        );
+
+        const result = await response.json();
+
+        if(!result.success){
+            throw new Error("Errore API");
+        }
+
+        dashboardData = result.data;
+
+        document.title =
+            `VIVENDA Dashboard • ${dashboardData.totale} feedback`;
+
+        updateBackendStatus(true);
+
+        updateCards(dashboardData);
+
+        updateCharts(dashboardData);
+
+        updateTable(dashboardData.ultimi);
+
+        updateDateTime();
+
+    } catch(err){
+
+        console.error(err);
+
+        updateBackendStatus(false);
+
+    } finally {
+
+        loading = false;
+
+    }
+
+};
 
     document
         .getElementById("btnRefresh")
