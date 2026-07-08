@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>VIVENDA Enterprise Console</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <h2>VIVENDA</h2>
+
+            <small>Enterprise Console</small>
+
+        </div>
+
+        <nav>
+
+            <a class="active" href="#">
+                Dashboard
+            </a>
+
+            <a href="#">
+                Configurazione
+            </a>
+
+            <a href="#">
+                Dispositivi
+            </a>
+
+            <a href="#">
+                Analytics
+            </a>
+
+            <a href="#">
+                Report
+            </a>
+
+            <a href="#">
+                Utenti
+            </a>
+
+            <a href="#">
+                Log
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <main>
+
+        <header>
+
+            <div>
+
+                <h1>Dashboard</h1>
+
+                <span id="lastUpdate">
+
+                    Ultimo aggiornamento --
+
+                </span>
+
+            </div>
+
+            <button id="refreshBtn">
+
+                Aggiorna
+
+            </button>
+
+        </header>
+
+        <section class="cards">
+
+            <div class="card">
+
+                <span>Voti Totali</span>
+
+                <h2 id="kpiTotale">0</h2>
+
+            </div>
+
+            <div class="card">
+
+                <span>Media</span>
+
+                <h2 id="kpiMedia">0</h2>
+
+            </div>
+
+            <div class="card">
+
+                <span>Oggi</span>
+
+                <h2 id="kpiOggi">0</h2>
+
+            </div>
+
+            <div class="card">
+
+                <span>Dispositivi</span>
+
+                <h2 id="kpiDevice">0</h2>
+
+            </div>
+
+        </section>
+
+        <section class="panel">
+
+            <h2>Distribuzione Voti</h2>
+
+            <canvas id="votesChart"></canvas>
+
+        </section>
+
+        <section class="panel">
+
+            <h2>Ultimi Voti</h2>
+
+            <table>
+
+                <thead>
+
+                <tr>
+
+                    <th>Ora</th>
+                    <th>Servizio</th>
+                    <th>Valutazione</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody id="lastVotes">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
